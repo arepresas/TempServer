@@ -28,6 +28,9 @@ public @Data class TempObject {
 	@NotNull
 	private Timestamp dateTime;
 
+	@NotNull
+	private String localDateTime;
+
 	public TempObject() {
 		super();
 	}

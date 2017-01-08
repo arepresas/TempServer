@@ -3,8 +3,10 @@ package com.focalserver.datatemp.rest.utils;
 import com.focalserver.datatemp.rest.models.TimeObject;
 import org.joda.time.DateTime;
 
+import java.sql.Timestamp;
+
 /**
- * Created by overlag on 11/12/16.
+ * Created by arepresas on 11/12/16.
  */
 public class TimePopulator {
 
@@ -18,6 +20,7 @@ public class TimePopulator {
         timeObject.setHour(dateTime.getHourOfDay());
         timeObject.setMinute(dateTime.getMinuteOfHour());
         timeObject.setSecond(dateTime.getSecondOfMinute());
+        timeObject.setLocalDateTime(LocalDateTimeUtils.getLocalDateTimeString(dateTime));
 
         return timeObject;
     }

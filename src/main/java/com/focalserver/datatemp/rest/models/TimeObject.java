@@ -12,4 +12,5 @@ public @Data class TimeObject {
     private int hour;
     private int minute;
     private int second;
+    private String localDateTime;
 }
