@@ -18,7 +18,8 @@ public final class LocalDateTimeUtils {
     }
 
     public static String getLocalDateTimeString(DateTime dateTime) {
-        return dateTime.toString(PATTERN);
+
+        return dateTime.toLocalDateTime().toString(PATTERN);
     }
 
 }

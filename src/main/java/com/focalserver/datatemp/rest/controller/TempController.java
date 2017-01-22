@@ -18,12 +18,12 @@ public class TempController {
 
 	@Autowired
     TempObjectDAO tempObjectDAO;
-	
+
     @RequestMapping(value="/tempdata", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
     public Long saveTempObject(@RequestBody TempObject tempObject) {
 
         Timestamp dateTimeNow = new Timestamp(System.currentTimeMillis());
-//dateTimeNow.toLocalDateTime()
+
     	tempObject.setDateTime(dateTimeNow);
     	tempObject.setLocalDateTime(LocalDateTimeUtils.getLocalDateTimeString(dateTimeNow));
     	return tempObjectDAO.save(tempObject).getDataId();
@@ -34,4 +34,11 @@ public class TempController {
     	
     	return tempObjectDAO.findOne(id);
     }
+
+    @RequestMapping(value="/tempdata2", method=RequestMethod.GET, produces = "application/json")
+    public Iterable<TempObject> getTempObjectByDay(@RequestParam(value="date") String date) {
+
+        return tempObjectDAO.localDateTime(date);
+    }
+
 }
