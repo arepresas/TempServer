@@ -1,7 +1,11 @@
 package com.focalserver.datatemp.rest.controller;
 
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.List;
 
+import com.focalserver.datatemp.rest.tos.DayTempsTO;
+import com.focalserver.datatemp.rest.tos.DayTempsTOPopulator;
 import com.focalserver.datatemp.rest.utils.LocalDateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,10 +39,37 @@ public class TempController {
     	return tempObjectDAO.findOne(id);
     }
 
-    @RequestMapping(value="/tempdata2", method=RequestMethod.GET, produces = "application/json")
-    public Iterable<TempObject> getTempObjectByDay(@RequestParam(value="date") String date) {
+    @RequestMapping(value="/getMaxMinTemp", method=RequestMethod.GET, produces = "application/json")
+    public DayTempsTO getTodayMinMaxTemp() {
 
-        return tempObjectDAO.localDateTime(date);
+        List<TempObject> tempObjects = tempObjectDAO.findByLocalDateTimeContainingOrderByDataIdDesc(LocalDateTimeUtils.getCurrentDate());
+
+        return getMaxMinDayTempsTO(tempObjects);
+    }
+
+    @RequestMapping(value="/getLastTemp", method=RequestMethod.GET, produces = "application/json")
+    public TempObject getLastTempObject() {
+
+        Long lastId = tempObjectDAO.count();
+
+        return tempObjectDAO.findOne(lastId);
+    }
+
+    private DayTempsTO getMaxMinDayTempsTO(List<TempObject> tempObjects) {
+
+        Long minTemp = null;
+        Long maxTemp = null;
+
+        for (TempObject tempObject : tempObjects) {
+            if (minTemp == null || minTemp > tempObject.getTemperature()) {
+                minTemp = tempObject.getTemperature();
+            }
+            if (maxTemp == null || maxTemp < tempObject.getTemperature()) {
+                maxTemp = tempObject.getTemperature();
+            }
+        }
+
+        return DayTempsTOPopulator.populate(minTemp, maxTemp);
     }
 
 }

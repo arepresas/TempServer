@@ -8,7 +8,7 @@ import java.sql.Timestamp;
 /**
  * Created by arepresas on 11/12/16.
  */
-public class TimePopulator {
+public final class TimePopulator {
 
     private final static TimeObject timeObject = new TimeObject();;
 
@@ -20,7 +20,7 @@ public class TimePopulator {
         timeObject.setHour(dateTime.getHourOfDay());
         timeObject.setMinute(dateTime.getMinuteOfHour());
         timeObject.setSecond(dateTime.getSecondOfMinute());
-        timeObject.setLocalDateTime(LocalDateTimeUtils.getLocalDateTimeString(dateTime));
+        timeObject.setLocalDateTime(LocalDateTimeUtils.getLocalDateTimeString(dateTime, null));
 
         return timeObject;
     }
