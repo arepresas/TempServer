@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TempObjectDAO extends JpaRepository<TempObject, Long> {
 
-    public List<TempObject> findByLocalDateTimeContainingOrderByDataIdDesc(String date);
+    public List<TempObject> findByLocalDateTimeContainingOrderByDataIdDesc(String pDate);
 
 }

@@ -1,18 +1,16 @@
 package com.focalserver.datatemp.rest.tos;
 
-import lombok.Data;
+import lombok.Builder;
 
 /**
  * Created by arepresas on 22/01/17.
  */
 
-@Data
-public class DayTempsTO {
+@Builder
+public final class DayTempsTO {
     private String minTemp;
     private String maxTemp;
 
-    public DayTempsTO(String minTemp, String maxTemp) {
-        this.minTemp = minTemp;
-        this.maxTemp = maxTemp;
+    private DayTempsTO() {
     }
 }

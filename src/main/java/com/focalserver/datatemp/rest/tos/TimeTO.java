@@ -1,11 +1,16 @@
-package com.focalserver.datatemp.rest.models;
+package com.focalserver.datatemp.rest.tos;
 
-import lombok.Data;
+import lombok.Builder;
 
 /**
  * Created by arepresas on 11/12/16.
  */
-public @Data class TimeObject {
+@Builder
+public final class TimeTO {
+
+    private TimeTO() {
+    }
+
     private int day;
     private int month;
     private int year;

@@ -9,10 +9,13 @@ public final class DayTempsTOPopulator {
     private DayTempsTOPopulator() {
     }
 
-    public static DayTempsTO populate(Long pminTemp, Long pmaxTemp) {
-        String minTemp = pminTemp==null?"--":pminTemp.toString();
-        String maxTemp = pmaxTemp==null?"--":pmaxTemp.toString();
+    private static String NO_DATA = "--";
 
-        return new DayTempsTO(minTemp, maxTemp);
+    public static DayTempsTO populate(Long pminTemp, Long pmaxTemp) {
+
+        return DayTempsTO.builder() //
+        .minTemp(pminTemp == null ? NO_DATA : pminTemp.toString()) //
+        .maxTemp(pmaxTemp == null ? NO_DATA : pmaxTemp.toString()) //
+        .build();
     }
 }
