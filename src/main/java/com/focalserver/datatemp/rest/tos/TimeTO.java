@@ -1,15 +1,14 @@
 package com.focalserver.datatemp.rest.tos;
 
 import lombok.Builder;
+import lombok.Data;
 
 /**
  * Created by arepresas on 11/12/16.
  */
 @Builder
+@Data
 public final class TimeTO {
-
-    private TimeTO() {
-    }
 
     private int day;
     private int month;
