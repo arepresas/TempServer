@@ -61,6 +61,12 @@ public class TempController {
         return getMaxMinDayTempsTO(tempObjects);
     }
 
+    @RequestMapping(value="/getTempByDate", method=RequestMethod.GET, produces = "application/json")
+    public List<TempObject> getTodayMinMaxTemp(@RequestParam(value="date") String date) {
+
+        return tempObjectDAO.findByLocalDateTimeContainingOrderByDataIdDesc(date);
+    }
+
     /**
      * Get last temperature in DB
      *
@@ -77,18 +83,22 @@ public class TempController {
     private DayTempsTO getMaxMinDayTempsTO(List<TempObject> tempObjects) {
 
         Long minTemp = null;
+        String minTempDate = null;
         Long maxTemp = null;
+        String maxTempDate = null;
 
         for (TempObject tempObject : tempObjects) {
             if (minTemp == null || minTemp > tempObject.getTemperature()) {
                 minTemp = tempObject.getTemperature();
+                minTempDate = tempObject.getLocalDateTime();
             }
             if (maxTemp == null || maxTemp < tempObject.getTemperature()) {
                 maxTemp = tempObject.getTemperature();
+                maxTempDate = tempObject.getLocalDateTime();
             }
         }
 
-        return DayTempsTOPopulator.populate(minTemp, maxTemp);
+        return DayTempsTOPopulator.populate(minTemp, minTempDate, maxTemp, maxTempDate);
     }
 
 }

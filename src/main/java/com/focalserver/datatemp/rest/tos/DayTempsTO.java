@@ -12,5 +12,7 @@ import lombok.Data;
 public final class DayTempsTO {
 
     private String minTemp;
+    private String minTempDate;
     private String maxTemp;
+    private String maxTempDate;
 }
