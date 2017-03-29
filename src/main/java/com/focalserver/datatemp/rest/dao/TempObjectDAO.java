@@ -10,4 +10,6 @@ public interface TempObjectDAO extends JpaRepository<TempObject, Long> {
 
     public List<TempObject> findByLocalDateTimeContainingOrderByDataIdDesc(String pDate);
 
+    public List<TempObject> findByLocalDateTimeSensorNameContainingOrderByDataIdDesc(String pDate);
+
 }

@@ -3,6 +3,7 @@ create table datatemp(
     temperature LONG NOT NULL,
     humidity LONG NOT NULL,
     date_time TIMESTAMP NOT NULL,
-    local_date_time VARCHAR(20) NOT NULL
+    local_date_time VARCHAR(20) NOT NULL,
+    sensor_name VARCHAR(20) NOT NULL
     PRIMARY KEY (data_id)
 );

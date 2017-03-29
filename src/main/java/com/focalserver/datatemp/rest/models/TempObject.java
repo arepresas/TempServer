@@ -31,6 +31,10 @@ public @Data class TempObject {
 	@NotNull
 	private String localDateTime;
 
+	@NotNull
+	private String sensorName;
+
+	@NotNull
 	public TempObject() {
 		super();
 	}
